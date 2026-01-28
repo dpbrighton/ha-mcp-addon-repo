@@ -1,2 +1,13 @@
 #!/command/with-contenv sh
+
+echo "=== S6 DIAGNOSTIC START ==="
+echo "PID: $$"
+echo "Listing /etc/services.d:"
+ls -l /etc/services.d || true
+echo "Listing /etc/services.d/ha_mcp:"
+ls -l /etc/services.d/ha_mcp || true
+echo "Contents of run file:"
+sed -n '1,5p' /etc/services.d/ha_mcp/run || true
+echo "=== S6 DIAGNOSTIC END ==="
+
 exec python3 /ha_mcp_server.py
