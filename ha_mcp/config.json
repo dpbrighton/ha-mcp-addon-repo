@@ -3,9 +3,9 @@
   "slug": "ha_mcp",
   "version": "1.0.0",
   "description": "MCP-style API for Home Assistant",
-  "arch": ["aarch64"],
   "startup": "services",
   "boot": "auto",
+  "arch": ["aarch64"],
   "host_network": true,
   "options": {
     "ha_token": ""
