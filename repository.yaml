@@ -1,11 +1,4 @@
 ha_mcp:
   name: Home Assistant MCP Server
+  version: "1.0.0"
   slug: ha_mcp
-  description: MCP-style API for Home Assistant
-  version: 1.0.0
-  startup: services
-  boot: auto
-  init: true
-  arch:
-    - aarch64
-  build_from: ghcr.io/home-assistant/aarch64-base:latest
