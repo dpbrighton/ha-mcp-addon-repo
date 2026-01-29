@@ -1,11 +1,12 @@
+# repository.yaml for ha-mcp-addon-repo
 ha_mcp:
-  name: Home Assistant MCP Server
+  name: "Home Assistant MCP Server"
+  slug: "ha_mcp"
   version: "1.0.0"
-  slug: ha_mcp
-  description: MCP-style API for Home Assistant
-  startup: services
-  boot: auto
+  description: "MCP-style API for Home Assistant"
+  startup: "services"
+  boot: "auto"
   init: true
   arch:
-    - aarch64
-  build_from: ghcr.io/home-assistant/aarch64-base:latest
+    - "aarch64"
+  build_from: "ghcr.io/home-assistant/aarch64-base:latest"
