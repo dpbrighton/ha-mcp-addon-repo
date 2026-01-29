@@ -1,0 +1,4 @@
+ha_mcp:
+  name: Home Assistant MCP Server
+  version: "1.0.0"
+  slug: ha_mcp
