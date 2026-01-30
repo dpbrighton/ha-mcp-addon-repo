@@ -1,2 +1,2 @@
-#!/command/with-contenv sh
+#!/command/with-contenv
 exec python3 /ha_mcp_server.py
