@@ -1,14 +1,15 @@
 ARG BUILD_FROM
 FROM ${BUILD_FROM}
 
-RUN apk add --no-cache python3 py3-pip
+# Install Python + deps via apk ONLY
+RUN apk add --no-cache \
+  python3 \
+  py3-fastapi \
+  py3-uvicorn \
+  py3-requests
 
-RUN pip3 install --no-cache-dir --break-system-packages fastapi uvicorn requests
-
+# Copy application
 COPY ha_mcp_server.py /ha_mcp_server.py
 
+# Copy s6 service definitions
 COPY rootfs/ /
-
-RUN chmod +x /etc/services.d/ha_mcp/run
-
-ENTRYPOINT ["/init"]
