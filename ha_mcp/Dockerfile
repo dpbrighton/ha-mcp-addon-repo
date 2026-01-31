@@ -1,18 +1,14 @@
 ARG BUILD_FROM
 FROM ${BUILD_FROM}
 
-# Install runtime deps ONLY via apk
+# Install dependencies
 RUN apk add --no-cache \
-  python3 \
-  py3-fastapi \
-  py3-requests
+    python3 \
+    py3-fastapi \
+    py3-requests
 
-# Copy application files
-COPY app /app
-COPY run.sh /run.sh
+# Copy application
+COPY ha_mcp_server.py /ha_mcp_server.py
 
-# Ensure run.sh is executable
-RUN chmod +x /run.sh
-
-# DO NOT set ENTRYPOINT
-# DO NOT set CMD
+# Copy s6 service definitions
+COPY rootfs/ /
