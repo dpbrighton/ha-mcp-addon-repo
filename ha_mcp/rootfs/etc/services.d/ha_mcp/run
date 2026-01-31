@@ -1,4 +1,5 @@
 #!/usr/bin/with-contenv sh
-set -e
 
-exec python3 /app/ha_mcp_server.py
+echo "Starting Home Assistant MCP Server"
+
+exec python3 /app/main.py
