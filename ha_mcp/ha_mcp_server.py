@@ -1,36 +1,30 @@
 from fastapi import FastAPI
-import requests
-import os
+from starlette.applications import Starlette
+from starlette.responses import JSONResponse
+from starlette.routing import Route
+import uvicorn
 
-app = FastAPI()
+def homepage(request):
+    return JSONResponse({"status": "ok", "message": "HA MCP running"})
 
-HA_URL = "http://supervisor/core/api"
-HA_TOKEN = os.environ.get("HA_TOKEN")
+app = Starlette(
+    debug=False,
+    routes=[
+        Route("/", homepage),
+    ],
+)
 
-HEADERS = {
-    "Authorization": f"Bearer {HA_TOKEN}",
-    "Content-Type": "application/json",
-}
+if __name__ == "__main__":
+    import asyncio
+    from starlette.servers import Server
+    from starlette.config import Config
 
-
-@app.get("/tools/get_state")
-def get_state(entity_id: str):
-    r = requests.get(
-        f"{HA_URL}/states/{entity_id}",
-        headers=HEADERS,
-        timeout=10,
+    config = Config(
+        "ha_mcp_server:app",
+        host="0.0.0.0",
+        port=8000,
+        loop="asyncio",
     )
-    r.raise_for_status()
-    return r.json()
 
-
-@app.post("/tools/call_service")
-def call_service(domain: str, service: str, entity_id: str):
-    r = requests.post(
-        f"{HA_URL}/services/{domain}/{service}",
-        headers=HEADERS,
-        json={"entity_id": entity_id},
-        timeout=10,
-    )
-    r.raise_for_status()
-    return {"status": "ok"}
+    server = Server(config)
+    asyncio.run(server.serve())
