@@ -1,0 +1,16 @@
+name: Home Assistant MCP Server
+slug: ha_mcp
+version: "1.0.0"
+init: true
+description: MCP-style API for Home Assistant
+startup: application
+boot: auto
+arch:
+  - aarch64
+host_network: true
+
+options:
+  ha_token: ""
+
+schema:
+  ha_token: str
